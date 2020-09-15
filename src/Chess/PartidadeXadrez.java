@@ -1,5 +1,8 @@
 package Chess;
 
+import Chess.pecas.Rei;
+import Chess.pecas.Torre;
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 
 public class PartidadeXadrez {
@@ -8,6 +11,7 @@ public class PartidadeXadrez {
 	
 	public PartidadeXadrez() {
 		tabuleiro = new Tabuleiro(8, 8);
+		iniciarPartida();
 	}
 	
 	public PecadeXadrez[][] getPecas(){//retorna uma matriz de peças de xadres correspondente a essa partida
@@ -19,5 +23,12 @@ public class PartidadeXadrez {
 		}
 		
 		return mat;
+	}
+	
+	private void iniciarPartida() {
+		tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.Branco), new Posicao(2, 1));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.Preto), new Posicao(0, 4));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.Branco), new Posicao(7, 4));
+
 	}
 }
