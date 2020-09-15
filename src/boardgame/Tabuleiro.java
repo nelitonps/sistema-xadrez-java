@@ -7,6 +7,9 @@ public class Tabuleiro {
 	private Peca[][] pecas;//Matriz de peças
 	
 	public Tabuleiro(int linha, int coluna) {
+		if(linha < 1 || coluna < 1) {
+			throw new TabuleiroException("Erro criando tabuleiro, é necessario que haja pelo menos 1 linha e 1 coluna");
+		}
 		this.linha = linha;
 		this.coluna = coluna;
 		pecas = new Peca[linha][coluna];//instanciando a matriz de pecas com quantidade de linha e coluna informados
@@ -16,28 +19,46 @@ public class Tabuleiro {
 		return linha;
 	}
 
-	public void setLinha(int linha) {
-		this.linha = linha;
-	}
-
 	public int getColuna() {
 		return coluna;
 	}
 
-	public void setColuna(int coluna) {
-		this.coluna = coluna;
-	}
-	
-	public Peca peca(int linha, int coluna) {
-		return pecas[linha][coluna];
+	public Peca peca(int lin, int col) {
+		if(!posicaoExistente(lin, col)){
+			throw new TabuleiroException("Posição não encontrada no tabuleiro");
+		}
+		return pecas[lin][col];
 	}
 	
 	public Peca peca(Posicao posicao) {//Sobrecarga do metodo peca
+		if(!posicaoExistente(posicao)){
+			throw new TabuleiroException("Posição não encontrada no tabuleiro");
+		}
+
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 	}
 	
 	public void colocarPeca(Peca peca, Posicao posicao) {
+		if(pecaExistente(posicao)) {
+			throw new TabuleiroException("Existe peça nesta posição " + posicao);
+		}
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
 		peca.posicao = posicao;
+	}
+	
+	public boolean posicaoExistente(int lin, int col) {//metodo auxiliar
+		return lin >=0 && lin < linha && col >=0 && col < coluna;
+	}
+	
+	public boolean posicaoExistente(Posicao posicao) {
+		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
+	}
+	
+	public boolean pecaExistente(Posicao posicao) {
+		if(!posicaoExistente(posicao)){
+			throw new TabuleiroException("Posição não encontrada no tabuleiro");
+		}
+
+		return peca(posicao) != null;
 	}
 }
