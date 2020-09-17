@@ -2,6 +2,8 @@ package Chess;
 
 import Chess.pecas.Rei;
 import Chess.pecas.Torre;
+import boardgame.Peca;
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 
 public class PartidadeXadrez {
@@ -22,6 +24,27 @@ public class PartidadeXadrez {
 		}
 		
 		return mat;
+	}
+	
+	public PecadeXadrez movimentoXadrez(XadrezPosicao posicaoOrigem, XadrezPosicao posicaoDestino) {
+		Posicao origem = posicaoOrigem.toPosicao();
+		Posicao destino = posicaoDestino.toPosicao();
+		validarPosicaoOrigem(origem);
+		Peca capituraPeca = iniciaMovimento(origem, destino);
+		return (PecadeXadrez)capituraPeca;
+	}
+	
+	private void validarPosicaoOrigem(Posicao posicao) {
+		if(!tabuleiro.pecaExistente(posicao)) {
+			throw new XadrezException("Não existe peça na posição de origem");
+		}
+	}
+	
+	private Peca iniciaMovimento(Posicao origem, Posicao destino) {
+		Peca p = tabuleiro.removePeca(origem);
+		Peca capituraPeca = tabuleiro.removePeca(destino);
+		tabuleiro.colocarPeca(p, destino);
+		return capituraPeca;
 	}
 	
 	private void novaPeca(char coluna, int linha, PecadeXadrez peca) {
