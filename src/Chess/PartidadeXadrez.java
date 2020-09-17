@@ -29,9 +29,19 @@ public class PartidadeXadrez {
 	}
 	
 	private void iniciarPartida() {
-		novaPeca('B', 6, new Torre(tabuleiro, Cor.Branco));
-		novaPeca('E', 8, new Rei(tabuleiro, Cor.Preto));
-		novaPeca('E', 1, new Rei(tabuleiro, Cor.Branco));
+		
+		novaPeca('C', 1, new Torre(tabuleiro, Cor.Branco));
+		novaPeca('C', 2, new Torre(tabuleiro, Cor.Branco));
+		novaPeca('D', 2, new Torre(tabuleiro, Cor.Branco));
+		novaPeca('E', 2, new Torre(tabuleiro, Cor.Branco));
+		novaPeca('E', 1, new Torre(tabuleiro, Cor.Branco));
+		novaPeca('D', 1, new Rei(tabuleiro, Cor.Branco));
 
+		novaPeca('C', 7, new Torre(tabuleiro, Cor.Preto));
+		novaPeca('C', 8, new Torre(tabuleiro, Cor.Preto));
+		novaPeca('D', 7, new Torre(tabuleiro, Cor.Preto));
+		novaPeca('E', 7, new Torre(tabuleiro, Cor.Preto));
+		novaPeca('E', 8, new Torre(tabuleiro, Cor.Preto));
+		novaPeca('D', 8, new Rei(tabuleiro, Cor.Preto));
 	}
 }
